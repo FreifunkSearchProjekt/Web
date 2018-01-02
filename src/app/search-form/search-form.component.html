@@ -1,0 +1,18 @@
+<form [formGroup]="searchForm" (ngSubmit)="doSearch()" style="width: 100%">
+  <div class="form-row align-items-center">
+    <div class="col col-lg-2">
+      <select formControlName="communityID" required class="custom-select mr-sm-2">
+        <option [ngValue]="null" disabled="true" hidden="true" class="bg-secondary">Select Community</option>
+        <option *ngFor="let community of communities" [ngValue]="community.communityCode" title="{{community.communityName}}">{{community.communityName}}</option>
+      </select>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <input type="text" formControlName="search" id="search" class="form-control">
+        <span class="input-group-append">
+              <button type="submit" class="btn btn-primary" data-disable-with="Search"><i class="fas fa-search"></i> Search</button>
+            </span>
+      </div>
+    </div>
+  </div>
+</form>
