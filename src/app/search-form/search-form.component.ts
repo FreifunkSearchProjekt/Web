@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { SearchResponseRootObject } from './SearchResponse';
+
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
@@ -20,9 +22,15 @@ export class SearchFormComponent implements OnInit {
   doSearch() {
     const hostDomain = window.location.hostname;
     const url = 'http://'+hostDomain+':9999/clientapi/search/'+this.searchForm.controls.communityID.value+'/'+this.searchForm.controls.search.value;
-    this.http.get(url).subscribe(data => {
-      console.log(data.hits);
-    });
+    this.http.get<SearchResponseRootObject>(url).subscribe(
+      data => {
+        data.hits.forEach((value) => {
+          console.log(value.fields);
+        });
+      },
+      err => {
+        console.error("Error occurred while searching: " + err)
+      });
   }
 
   ngOnInit() {

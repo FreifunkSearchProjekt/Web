@@ -7,7 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { SearchFormComponent } from './search-form/search-form.component';
-
+import { routing } from "./app.routing";
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { SearchFormComponent } from './search-form/search-form.component';
     BrowserModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]
