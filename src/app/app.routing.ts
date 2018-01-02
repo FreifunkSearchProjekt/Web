@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from "@angular/router";
 
-import { AppComponent } from './app.component';
+import { SearchFormComponent } from './search-form/search-form.component';
 
 const routes: Routes = [
-  { path: "", component: AppComponent },
-  { path: '**', component: AppComponent },
+  { path: "", component: SearchFormComponent },
+  { path: '**', component: SearchFormComponent },
 ];
 
 export const routing = RouterModule.forRoot(

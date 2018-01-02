@@ -26,7 +26,7 @@
       {{hit.fields.Title}}
     </div>
     <div class="card-body">
-      <h5 class="card-title"><a href="{{hit.fields.URL}}" title="{{hit.fields.URL}}">{{hit.fields.URL}}</a></h5>
+      <h5 class="card-title" [hidden]="hit.fields.URL == null"><a href="https://{{hit.fields.URL}}{{hit.fields.Path}}" title="{{hit.fields.URL}}">{{hit.fields.URL}}</a></h5>
       <p class="card-text">{{hit.fields.Description}}</p>
     </div>
   </div>

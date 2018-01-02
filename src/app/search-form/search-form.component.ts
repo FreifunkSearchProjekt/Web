@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpEventType, HttpRequest} from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import {Hit, SearchResponseRootObject} from './SearchResponse';
+import {Fields, Hit, SearchResponseRootObject} from './SearchResponse';
 
 @Component({
   selector: 'app-search-form',
@@ -25,7 +25,9 @@ export class SearchFormComponent implements OnInit {
   doSearch() {
     this.searching = true;
     const hostDomain = window.location.hostname;
-    const url = 'http://'+hostDomain+':9999/clientapi/search/'+this.searchForm.controls.communityID.value+'/'+this.searchForm.controls.search.value;
+    let communityID = this.searchForm.controls.communityID.value ? this.searchForm.controls.communityID.value : "ffslfl";
+
+    const url = 'http://'+hostDomain+':9999/clientapi/search/'+communityID+'/'+this.searchForm.controls.search.value;
 
     const req = new HttpRequest('GET', url, {
       reportProgress: true,
@@ -44,6 +46,13 @@ export class SearchFormComponent implements OnInit {
             // When getting the full response body
             const data:SearchResponseRootObject = <SearchResponseRootObject>event.body;
             this.hits = data.hits;
+            if (this.hits.length === 0) {
+              let fakeResult: Hit = <Hit>{};
+              fakeResult.fields = <Fields>{};
+              fakeResult.fields.Title = "No Results Found";
+              fakeResult.fields.Description = "Please Enter another Search Term.";
+              this.hits.push(fakeResult)
+            }
             this.searching = false;
             break;
         }
