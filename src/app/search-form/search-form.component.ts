@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpEventType, HttpRequest} from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { SearchResponseRootObject } from './SearchResponse';
+import {Hit, SearchResponseRootObject} from './SearchResponse';
 
 @Component({
   selector: 'app-search-form',
@@ -11,25 +11,42 @@ import { SearchResponseRootObject } from './SearchResponse';
 })
 export class SearchFormComponent implements OnInit {
   public communities: any[] = [{"communityCode":"ffslfl","communityName":"Freifunk Schleswig-Flensburg"}];
+  public hits: Hit[];
+  public searching: boolean = false;
+  public progress: number = 0;
 
   public searchForm = this.fb.group({
     communityID: [null, Validators.required],
     search: [null, Validators.required]
   });
 
-  constructor(public fb: FormBuilder, private http: HttpClient) { }
+  constructor(public fb: FormBuilder, private http: HttpClient) {  }
 
   doSearch() {
+    this.searching = true;
     const hostDomain = window.location.hostname;
     const url = 'http://'+hostDomain+':9999/clientapi/search/'+this.searchForm.controls.communityID.value+'/'+this.searchForm.controls.search.value;
-    this.http.get<SearchResponseRootObject>(url).subscribe(
-      data => {
-        data.hits.forEach((value) => {
-          console.log(value.fields);
-        });
-      },
-      err => {
-        console.error("Error occurred while searching: " + err)
+
+    const req = new HttpRequest('GET', url, {
+      reportProgress: true,
+    });
+
+    this.http.request(req)
+      .subscribe(event => {
+        switch (event.type) {
+          // handle the download progress event received
+          case HttpEventType.DownloadProgress:
+            this.progress = 100 * event.loaded / event.total;
+            break;
+
+          // handle the response event received
+          case HttpEventType.Response:
+            // When getting the full response body
+            const data:SearchResponseRootObject = <SearchResponseRootObject>event.body;
+            this.hits = data.hits;
+            this.searching = false;
+            break;
+        }
       });
   }
 
