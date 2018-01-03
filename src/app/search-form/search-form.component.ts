@@ -23,11 +23,17 @@ export class SearchFormComponent implements OnInit {
   constructor(public fb: FormBuilder, private http: HttpClient) {  }
 
   doSearch() {
-    this.searching = true;
     const hostDomain = window.location.hostname;
     let communityID = this.searchForm.controls.communityID.value ? this.searchForm.controls.communityID.value : "ffslfl";
+    const value = this.searchForm.controls.search.value;
 
-    const url = 'http://'+hostDomain+':9999/clientapi/search/'+communityID+'/'+this.searchForm.controls.search.value;
+    if (!value) {
+      return
+    }
+
+    const url = 'http://'+hostDomain+':9999/clientapi/search/'+communityID+'/'+value;
+
+    this.searching = true;
 
     const req = new HttpRequest('GET', url, {
       reportProgress: true,
@@ -58,13 +64,15 @@ export class SearchFormComponent implements OnInit {
         }
       },
       error => {
-        console.error("Got Error while searching: " + JSON.stringify(error, null, 4));
-        let fakeResult: Hit = <Hit>{};
-        fakeResult.fields = <Fields>{};
-        fakeResult.fields.Title = "Got Error While Searching";
-        fakeResult.fields.Description = JSON.stringify(error, null, 4);
-        this.hits = [];
-        this.hits.push(fakeResult);
+        if (error.status !== 404) {
+          console.error("Got Error while searching: " + JSON.stringify(error, null, 4));
+          let fakeResult: Hit = <Hit>{};
+          fakeResult.fields = <Fields>{};
+          fakeResult.fields.Title = "Got Error While Searching";
+          fakeResult.fields.Description = JSON.stringify(error, null, 4);
+          this.hits = [];
+          this.hits.push(fakeResult);
+        }
         this.searching = false;
       });
   }
