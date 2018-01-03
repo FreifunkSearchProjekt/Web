@@ -3,7 +3,7 @@
     <div class="form-row align-items-center">
       <div class="col col-lg-2">
         <select formControlName="communityID" required class="custom-select mr-sm-2">
-          <option [ngValue]="null" disabled="true" hidden="true" class="bg-secondary">Select Community</option>
+          <option [ngValue]="null" disabled="true" hidden="true">Select Community</option>
           <option *ngFor="let community of communities" [ngValue]="community.communityCode" title="{{community.communityName}}">{{community.communityName}}</option>
         </select>
       </div>
