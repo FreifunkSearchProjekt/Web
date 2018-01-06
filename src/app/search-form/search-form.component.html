@@ -2,16 +2,16 @@
   <form [formGroup]="searchForm" (ngSubmit)="doSearch()" style="width: 100%">
     <div class="form-row align-items-center">
       <div class="col col-lg-2">
-        <select formControlName="communityID" required class="custom-select mr-sm-2">
+        <select formControlName="communityID" required class="custom-select mr-sm-2" aria-label="Select Community">
           <option [ngValue]="null" disabled="true" hidden="true">Select Community</option>
           <option *ngFor="let community of communities" [ngValue]="community.communityCode" title="{{community.communityName}}">{{community.communityName}}</option>
         </select>
       </div>
       <div class="col">
         <div class="input-group">
-          <input type="text" formControlName="search" id="search" class="form-control">
+          <input aria-labelledby="searchbutton" type="text" formControlName="search" id="search" class="form-control">
           <span class="input-group-append">
-            <button [disabled]="searching" type="submit" class="btn btn-primary" data-disable-with="Search"><i class="fas fa-search"></i> Search</button>
+            <button [disabled]="searching" type="submit" class="btn btn-primary" data-disable-with="Search" id="searchbutton"><i class="fas fa-search"></i> Search</button>
           </span>
         </div>
       </div>
@@ -25,12 +25,12 @@
 </div>
 <div class="row top-buffer bottom-buffer" *ngFor="let hit of pagedItems">
   <div class="card w-100">
-    <div class="card-header">
+    <div class="card-header" aria-label="Page Title">
       {{hit.fields.Title}}
     </div>
     <div class="card-body">
-      <h5 class="card-title" [hidden]="hit.fields.URL == null"><a href="{{hit.fields.URL}}" title="{{hit.fields.URL}}">{{hit.fields.URL}}</a></h5>
-      <p class="card-text">{{hit.fields.Description}}</p>
+      <h5 class="card-title" [hidden]="hit.fields.URL == null" aria-label="Page URL"><a href="{{hit.fields.URL}}" title="{{hit.fields.URL}}">{{hit.fields.URL}}</a></h5>
+      <p class="card-text" aria-label="Page Description">{{hit.fields.Description}}</p>
     </div>
   </div>
 </div>

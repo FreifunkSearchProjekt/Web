@@ -81,6 +81,8 @@ export class SearchFormComponent implements OnInit {
           this.hits = [];
           this.hits.push(fakeResult);
         }
+        // initialize to page 1
+        this.setPage(1);
         this.searching = false;
       });
   }
