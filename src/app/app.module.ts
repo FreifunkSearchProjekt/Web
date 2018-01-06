@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { routing } from "./app.routing";
+import { PagerService } from './_services';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { routing } from "./app.routing";
     HttpClientModule,
     routing
   ],
-  providers: [],
+  providers: [
+    PagerService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

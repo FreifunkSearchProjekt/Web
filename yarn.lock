@@ -214,6 +214,10 @@
   version "2.53.43"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-2.53.43.tgz#2de3d718819bc20165754c4a59afb7e9833f6707"
 
+"@types/underscore@^1.8.6":
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.8.6.tgz#3f4b9c5915379b420fe7de75bd8cb58a7d9835ed"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -300,10 +304,6 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
-
-angular-progress-http@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/angular-progress-http/-/angular-progress-http-1.0.0.tgz#73ee0a91f4e29543492bd7652bfb7a70b07fe6df"
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -5702,6 +5702,10 @@ uid-number@^0.0.6:
 ultron@1.0.x:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"
+
+underscore@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
 uniq@^1.0.1:
   version "1.0.1"

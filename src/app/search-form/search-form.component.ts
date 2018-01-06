@@ -3,6 +3,7 @@ import {HttpClient, HttpEventType, HttpRequest} from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {Fields, Hit, SearchResponseRootObject} from './SearchResponse';
+import { PagerService } from '../_services'
 
 @Component({
   selector: 'app-search-form',
@@ -14,13 +15,18 @@ export class SearchFormComponent implements OnInit {
   public hits: Hit[];
   public searching: boolean = false;
   public progress: number = 0;
+  // pager object
+  pager: any = {};
+
+  // paged items
+  pagedItems: Hit[];
 
   public searchForm = this.fb.group({
     communityID: [null, Validators.required],
     search: [null, Validators.required]
   });
 
-  constructor(public fb: FormBuilder, private http: HttpClient) {  }
+  constructor(public fb: FormBuilder, private http: HttpClient, private pagerService: PagerService) {  }
 
   doSearch() {
     const hostDomain = window.location.hostname;
@@ -52,6 +58,8 @@ export class SearchFormComponent implements OnInit {
             // When getting the full response body
             const data:SearchResponseRootObject = <SearchResponseRootObject>event.body;
             this.hits = data.hits;
+            // initialize to page 1
+            this.setPage(1);
             if (this.hits.length === 0) {
               let fakeResult: Hit = <Hit>{};
               fakeResult.fields = <Fields>{};
@@ -78,6 +86,18 @@ export class SearchFormComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+
+    // get pager object from service
+    this.pager = this.pagerService.getPager(this.hits.length, page);
+
+    // get current page of items
+    this.pagedItems = this.hits.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 }

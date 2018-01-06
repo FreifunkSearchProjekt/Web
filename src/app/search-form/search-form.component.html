@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row top-buffer-20">
   <form [formGroup]="searchForm" (ngSubmit)="doSearch()" style="width: 100%">
     <div class="form-row align-items-center">
       <div class="col col-lg-2">
@@ -20,7 +20,7 @@
 </div>
 <hr>
 <ngb-progressbar *ngIf="searching" [value]="progress" [striped]="true" [animated]="true"></ngb-progressbar>
-<div class="row" *ngFor="let hit of hits">
+<div class="row top-buffer bottom-buffer" *ngFor="let hit of pagedItems">
   <div class="card w-100">
     <div class="card-header">
       {{hit.fields.Title}}
@@ -31,3 +31,22 @@
     </div>
   </div>
 </div>
+<nav aria-label="Search results pages">
+  <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-center">
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+      <a class="page-link" (click)="setPage(1)">First</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+      <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+      <a class="page-link" (click)="setPage(page)">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+      <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+      <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
+    </li>
+  </ul>
+</nav>
