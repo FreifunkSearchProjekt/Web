@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import {Fields, Hit, SearchResponseRootObject} from './SearchResponse';
 import { PagerService } from '../_services'
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'app-search-form',
@@ -26,11 +27,11 @@ export class SearchFormComponent implements OnInit {
     search: [null, Validators.required]
   });
 
-  constructor(public fb: FormBuilder, private http: HttpClient, private pagerService: PagerService) {  }
+  constructor(public fb: FormBuilder, private http: HttpClient, private pagerService: PagerService, private config: AppConfig) {  }
 
   doSearch() {
-    const hostDomain = "riot.nordgedanken.de";
-    let communityID = this.searchForm.controls.communityID.value ? this.searchForm.controls.communityID.value : "ffslfl";
+    const hostDomain = this.config.getConfig("hostDomain");
+    let communityID = this.searchForm.controls.communityID.value || this.config.getConfig("defaultCommunityID");
     const value = this.searchForm.controls.search.value;
 
     if (!value) {
