@@ -58,8 +58,6 @@ export class SearchFormComponent implements OnInit {
             // When getting the full response body
             const data:SearchResponseRootObject = <SearchResponseRootObject>event.body;
             this.hits = data.hits;
-            // initialize to page 1
-            this.setPage(1);
             if (this.hits.length === 0) {
               let fakeResult: Hit = <Hit>{};
               fakeResult.fields = <Fields>{};
@@ -68,6 +66,8 @@ export class SearchFormComponent implements OnInit {
               this.hits.push(fakeResult);
             }
             this.searching = false;
+            // initialize to page 1
+            this.setPage(1);
             break;
         }
       },
