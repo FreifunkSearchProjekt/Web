@@ -1,13 +1,14 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <span class="navbar-brand mb-0 h1">
+    <img src="/assets/FreifunkSearchProjektLogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    {{ title }}
+  </span>
+</nav>
 <main class="container" role="main">
-  <div class="row">
-    <div class="col-auto">
-      <h1>{{ title }}</h1>
-    </div>
-  </div>
   <router-outlet></router-outlet>
 </main>
-<footer class="footer">
+<footer class="footer" aria-label="Footer">
   <div class="container">
-    <span class="text-muted"><i class="fab fa-github"></i> Fork us at Github: <a href="https://github.com/FreifunkSearchProjekt">@FreifunkSearchProjekt</a></span>
+    <span class="text-muted" aria-label="Github Project Link"><i class="fab fa-github"></i> Fork us at Github: <a href="https://github.com/FreifunkSearchProjekt">@FreifunkSearchProjekt</a></span>
   </div>
 </footer>
