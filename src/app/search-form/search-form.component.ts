@@ -30,6 +30,9 @@ export class SearchFormComponent implements OnInit {
   constructor(public fb: FormBuilder, private http: HttpClient, private pagerService: PagerService, private config: AppConfig) {  }
 
   doSearch() {
+    this.hits = [];
+    this.pagedItems = [];
+
     const hostDomain = this.config.getConfig("hostDomain");
     let communityID = this.searchForm.controls.communityID.value || this.config.getConfig("defaultCommunityID");
     const value = this.searchForm.controls.search.value;
