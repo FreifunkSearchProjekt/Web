@@ -1,9 +1,9 @@
 <div class="row top-buffer-20">
   <form [formGroup]="searchForm" (ngSubmit)="doSearch()" style="width: 100%">
     <div class="form-row align-items-center">
-      <div class="col col-lg-2">
+      <div class="col col-lg-auto">
         <select formControlName="communityID" required class="custom-select mr-sm-2" aria-label="Select Community">
-          <option [ngValue]="null" disabled="true" hidden="true" i18n>Select Community</option>
+          <option [ngValue]="null" disabled="true" hidden="true">{{ 'Select Community' | i18next }}</option>
           <option *ngFor="let community of communities" [ngValue]="community.communityCode" title="{{community.communityName}}">{{community.communityName}}</option>
         </select>
       </div>
@@ -11,7 +11,7 @@
         <div class="input-group">
           <input aria-labelledby="searchbutton" type="text" formControlName="search" id="search" class="form-control">
           <span class="input-group-append">
-            <button [disabled]="searching" type="submit" class="btn btn-primary" data-disable-with="Search" id="searchbutton" i18n><i class="fas fa-search"></i> Search</button>
+            <button [disabled]="searching" type="submit" class="btn btn-primary" data-disable-with="Search" id="searchbutton"><i class="fas fa-search"></i> {{ 'Search' | i18next }}</button>
           </span>
         </div>
       </div>
@@ -21,7 +21,7 @@
 <hr>
 <ngb-progressbar *ngIf="searching" [value]="progress" [striped]="true" [animated]="true"></ngb-progressbar>
 <div class="row top-buffer bottom-buffer" *ngIf="hits?.length > 0">
-  <p class="text-right" i18n>Number of Results: {{hits?.length}}</p>
+  <p class="text-right" i18n>{{ 'Number of Results:' | i18next }} {{hits?.length}}</p>
 </div>
 <div class="row top-buffer bottom-buffer" *ngFor="let hit of pagedItems">
   <div class="card w-100">
@@ -37,19 +37,19 @@
 <nav aria-label="Search results pages">
   <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-center">
     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-      <a class="page-link" (click)="setPage(1)" i18n>First</a>
+      <a class="page-link" (click)="setPage(1)">{{ 'First' | i18next }}</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-      <a class="page-link" (click)="setPage(pager.currentPage - 1)" i18n>Previous</a>
+      <a class="page-link" (click)="setPage(pager.currentPage - 1)">{{ 'Previous' | i18next }}</a>
     </li>
     <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
       <a class="page-link" (click)="setPage(page)">{{page}}</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-      <a class="page-link" (click)="setPage(pager.currentPage + 1)" i18n>Next</a>
+      <a class="page-link" (click)="setPage(pager.currentPage + 1)">{{ 'Next' | i18next }}</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-      <a class="page-link" (click)="setPage(pager.totalPages)" i18n>Last</a>
+      <a class="page-link" (click)="setPage(pager.totalPages)">{{ 'Last' | i18next }}</a>
     </li>
   </ul>
 </nav>
