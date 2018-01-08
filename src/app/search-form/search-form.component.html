@@ -26,10 +26,9 @@
 <div class="row top-buffer bottom-buffer" *ngFor="let hit of pagedItems">
   <div class="card w-100">
     <div class="card-header" aria-label="Page Title">
-      {{hit.fields.Title}}
+      <a href="{{hit.fields.URL}}" title="{{hit.fields.URL}}">{{hit.fields.Title}}</a>
     </div>
     <div class="card-body">
-      <h5 class="card-title" [hidden]="hit.fields.URL == null" aria-label="Page URL"><a href="{{hit.fields.URL}}" title="{{hit.fields.URL}}">{{hit.fields.URL}}</a></h5>
       <p class="card-text" aria-label="Page Description">{{hit.fields.Description}}</p>
     </div>
   </div>
