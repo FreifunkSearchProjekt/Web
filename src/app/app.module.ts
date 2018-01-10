@@ -19,7 +19,7 @@ import { AppConfig }       from './app.config';
  */
 const i18nextOptions = {
   fallbackLng: 'en',
-  debug: true, // set debug?
+  debug: false, // set debug?
   returnEmptyString: false,
   interpolation: {
     format: I18NextModule.interpolationFormat()

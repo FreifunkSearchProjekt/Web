@@ -1,7 +1,7 @@
 export interface SearchResponseRootObject {
   status: Status;
   request: Request;
-  hits?: (HitsEntity)[] | null;
+  hits?: HitsEntity[] | null;
   total_hits: number;
   max_score: number;
   took: number;
@@ -17,10 +17,10 @@ export interface Request {
   size: number;
   from: number;
   highlight: Highlight;
-  fields?: (string)[] | null;
+  fields?: string[] | null;
   facets?: null;
   explain: boolean;
-  sort?: (string)[] | null;
+  sort?: string[] | null;
   includeLocations: boolean;
 }
 export interface Query {
@@ -49,12 +49,12 @@ export interface Locations {
 }
 
 export interface Fragments {
-  Body?: (string)[] | null;
-  Description?: (string)[] | null;
-  Host?: (string)[] | null;
-  Path?: (string)[] | null;
-  Title?: (string)[] | null;
-  URL?: (string)[] | null;
+  Body?: any[];
+  Description?: any[];
+  Host?: any[];
+  Path?: any[];
+  Title?: any[];
+  URL?: any[];
 }
 export interface Fields {
   Description: string;
