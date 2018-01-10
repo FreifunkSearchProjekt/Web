@@ -1,5 +1,7 @@
-import { Component, NgModule } from '@angular/core';
+import {Component, Inject, NgModule} from '@angular/core';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {I18NextService, ITranslationService} from 'angular-i18next';
 
 
 @NgModule({
@@ -13,4 +15,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 })
 export class AppComponent {
   title = 'Freifunk Search Projekt';
+
+  constructor(@Inject(I18NextService) private i18NextService: ITranslationService) {
+
+  }
 }
