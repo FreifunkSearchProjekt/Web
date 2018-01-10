@@ -66,8 +66,8 @@ export class SearchFormComponent implements OnInit {
             if (this.hits.length === 0) {
               let fakeResult: HitsEntity = <HitsEntity>{};
               fakeResult.fields = <Fields>{};
-              fakeResult.fields.Title = "No Results Found";
-              fakeResult.fields.Description = "Please Enter another Search Term.";
+              fakeResult.fields.title = "No Results Found";
+              fakeResult.fields.description = "Please Enter another Search Term.";
               this.hits.push(fakeResult);
             }
             this.searching = false;
@@ -81,8 +81,8 @@ export class SearchFormComponent implements OnInit {
           console.error("Got Error while searching: " + JSON.stringify(error, null, 4));
           let fakeResult: HitsEntity = <HitsEntity>{};
           fakeResult.fields = <Fields>{};
-          fakeResult.fields.Title = "Got Error While Searching";
-          fakeResult.fields.Description = JSON.stringify(error, null, 4);
+          fakeResult.fields.title = "Got Error While Searching";
+          fakeResult.fields.description = JSON.stringify(error, null, 4);
           this.hits = [];
           this.hits.push(fakeResult);
         }
