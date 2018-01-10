@@ -26,15 +26,15 @@
 <div class="row top-buffer bottom-buffer" *ngFor="let hit of pagedItems">
   <div class="card w-100">
     <div class="card-header" aria-label="Page Title">
-      <a href="{{hit.fields?.URL || hit.id}}" title="{{hit.fields?.Title || hit.id}}">{{hit.fields?.Title || hit.id}}</a><br/>
-      <a href="{{hit.fields?.URL || hit.id}}" style="font-size: 70%;" class="text-muted">{{hit.fields?.URL || hit.id}}</a>
+      <a href="{{hit.fields.url}}" title="{{hit.fields?.title}}">{{hit.fields?.title}}</a><br/>
+      <a href="{{hit.fields.url}}" style="font-size: 70%;" class="text-muted">{{hit.fields?.url}}</a>
     </div>
     <div class="card-body">
       <ng-container *ngIf="!!hit.fragments; else FallbackDescription">
-        <ng-container *ngIf="hit.fragments['description']?.length > 0; else FallbackDescription">
-          <div class="row" *ngFor="let description of hit.fragments['description']">
+        <ng-container *ngIf="!!hit.fragments.description && hit.fragments.description.length > 0; else FallbackDescription">
+          <div class="row" *ngFor="let description of hit.fragments.description">
             <div class="col-auto">
-              <p class="card-text" aria-label="Page Fragment">{{description}}</p>
+              <p class="card-text" aria-label="Page Fragment" [innerHTML]="description"></p>
             </div>
           </div>
         </ng-container>
@@ -42,7 +42,7 @@
       <ng-template #FallbackDescription>
         <div class="row">
           <div class="col-auto">
-            <p class="card-text" aria-label="Page Fragment">{{hit.fields?.Description}}</p>
+            <p class="card-text" aria-label="Page Fragment">{{hit.fields?.description}}</p>
           </div>
         </div>
       </ng-template>

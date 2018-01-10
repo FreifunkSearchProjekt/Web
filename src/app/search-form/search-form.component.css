@@ -1,3 +1,6 @@
 .top-buffer { margin-top:10px; }
 .top-buffer-20 { margin-top:20px; }
 .bottom-buffer { margin-bottom:10px; }
+:host ::ng-deep mark {
+  background-color: #ffeb83 !important;
+}

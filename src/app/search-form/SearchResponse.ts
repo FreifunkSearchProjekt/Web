@@ -49,19 +49,21 @@ export interface Locations {
 }
 
 export interface Fragments {
-  Body?: any[];
-  Description?: any[];
-  Host?: any[];
-  Path?: any[];
-  Title?: any[];
-  URL?: any[];
+  body?: (string)[] | null;
+  description?: (string)[] | null;
+  host?: (string)[] | null;
+  path?: (string)[] | null;
+  title?: (string)[] | null;
+  url?: (string)[] | null;
 }
+
 export interface Fields {
-  Description: string;
-  Host: string;
-  Path: string;
-  Title: string;
-  URL: string;
+  description: string;
+  host: string;
+  path: string;
+  title: string;
+  url: string;
 }
+
 export interface Facets {
 }
