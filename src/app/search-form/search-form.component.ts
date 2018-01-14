@@ -62,8 +62,18 @@ export class SearchFormComponent implements OnInit {
         switch (event.type) {
           case HttpEventType.Response:
             this.maxResults = <number>event.body;
-            // initialize to page 1
-            this.setPage(1);
+            if (this.maxResults === 0) {
+              let fakeResult: HitsEntity = <HitsEntity>{};
+              fakeResult.fields = <Fields>{};
+              fakeResult.fields.title = "No Results Found";
+              fakeResult.fields.description = "Please Enter another Search Term.";
+              this.pagedItems.push(fakeResult);
+
+              this.searching = false;
+            } else {
+              // initialize to page 1
+              this.setPage(1);
+            }
         }
       });
   }
@@ -72,7 +82,6 @@ export class SearchFormComponent implements OnInit {
   }
 
   setPage(page: number) {
-    console.log(this.maxResults)
     if (page < 1 || page > this.pager.totalPages) {
       return;
     }
@@ -98,13 +107,6 @@ export class SearchFormComponent implements OnInit {
           // When getting the full response body
           const data:SearchResponseRootObject = <SearchResponseRootObject>event.body;
           this.pagedItems = data.hits;
-          if (this.pagedItems.length === 0) {
-            let fakeResult: HitsEntity = <HitsEntity>{};
-            fakeResult.fields = <Fields>{};
-            fakeResult.fields.title = "No Results Found";
-            fakeResult.fields.description = "Please Enter another Search Term.";
-            this.pagedItems.push(fakeResult);
-          }
           this.searching = false;
           break;
       }
@@ -122,9 +124,6 @@ export class SearchFormComponent implements OnInit {
 
         this.searching = false;
       });
-
-    // get current page of items
-    //this.pagedItems = this.hits.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 }
